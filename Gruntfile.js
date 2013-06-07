@@ -1,6 +1,6 @@
 /*
  * grunt-base64
- * https://github.com/dmlap/grunt-base64
+ * https://github.com/BrightcoveOS/grunt-base64
  *
  * Copyright (c) 2013 Brightcove
  * Licensed under the Apache 2.0 licenses.
