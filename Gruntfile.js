@@ -30,22 +30,16 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     base64: {
-      default_options: {
-        options: {
-        },
+      text: {
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
+          'tmp/text.b64': 'test/fixtures/text'
+        }
       },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
+      binary: {
         files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
+          'tmp/tiny.mp4.b64': 'test/fixtures/tiny.mp4'
+        }
+      }
     },
 
     // Unit tests.

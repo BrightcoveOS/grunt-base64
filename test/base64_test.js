@@ -24,25 +24,41 @@ var grunt = require('grunt');
 
 exports.base64 = {
   setUp: function(done) {
-    // setup here if necessary
     done();
   },
-  default_options: function(test) {
+
+  text: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var
+      raw = grunt.file.read('test/fixtures/text', {
+        encoding: null
+      }).toString('hex'),
+      decoded = new Buffer(grunt.file.read('tmp/text.b64'), 'base64').toString('hex');
 
+    
+    test.equal(decoded, raw, 'the text file should be base64 encoded');
     test.done();
   },
-  custom_options: function(test) {
-    test.expect(1);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+  binary: function(test) {
+    var
+      raw = grunt.file.read('test/fixtures/tiny.mp4', {
+        encoding: null
+      }).toString('hex'),
+      rawWords = raw.match(/.{1,4}/g),
+      decoded = new Buffer(grunt.file.read('tmp/tiny.mp4.b64'), 'base64').toString('hex'),
+      decodedWords = decoded.match(/.{1,4}/g),
+      i = rawWords.length;
+    
 
+    test.expect(i + 1);
+    while (i--) {
+      test.equal(decodedWords[i],
+                 rawWords[i],
+                 'difference at word ' + i + ': expected ' + rawWords[i] + ' but found ' + decodedWords[i]);
+    }
+    test.equal(decodedWords.length, rawWords.length, 'the decoded output should be the same size as the original');
     test.done();
   },
 };
