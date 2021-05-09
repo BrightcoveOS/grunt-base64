@@ -46,9 +46,7 @@ The base64 task takes a standard files configuration and transforms input files 
 ```js
 grunt.initConfig({
   base64: {
-    files: {
-      'dest/testing123.b64': ['src/testing', 'src/123'],
-    },
+    'dest/testing123.b64': ['src/testing', 'src/123'],
   },
 })
 ```
